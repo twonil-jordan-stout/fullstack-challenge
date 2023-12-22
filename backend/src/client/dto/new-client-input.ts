@@ -3,8 +3,8 @@ import { IsOptional } from 'class-validator';
 
 @InputType()
 export class NewClientInput {
-  @Field((type) => Int)
-  id: number;
+  @Field()
+  id: string;
 
   @Field()
   name: string;

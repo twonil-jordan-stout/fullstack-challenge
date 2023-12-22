@@ -2,16 +2,18 @@ version: '3.8'
 
 services:
   db:
-     image: postgres:16
-     environment:
-       - POSTGRES_USER=admin
-       - POSTGRES_PASSWORD=admin1234
-       - POSTGRES_DB=demo
-     container_name: postgres
-     ports:
-       - '5432:5432'
+    image: postgres:16
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin1234
+      - POSTGRES_DB=demo
+    container_name: postgres
+    ports:
+      - '5432:5432'
+    networks:
+      - backend
 
-  app:
+  backend:
     build:
       dockerfile: Dockerfile
       context: ./backend
@@ -24,5 +26,26 @@ services:
     ports:
       - '3000:3000'
     depends_on:
-      - db  
-     
+      - db
+    networks:
+      - backend
+      - frontend
+
+  frontend:
+    build:
+      dockerfile: Dockerfile
+      context: ./frontend
+    environment:
+      - VITE_API_URL=http://localhost:3000/graphql
+    volumes:
+      - ./src:/app/src
+    ports:
+      - 5173:5173
+    depends_on:
+      - backend
+    networks:
+      - frontend
+
+networks:
+  backend:
+  frontend:

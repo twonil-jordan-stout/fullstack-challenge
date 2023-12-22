@@ -24,8 +24,12 @@ export class ClientService {
     });
   }
 
-  async findOneById(id: number): Promise<Client> {
-    return this.clientModel.findByPk(id);
+  async findOne(id: string): Promise<Client> {
+    return this.clientModel.findOne({
+      where :{
+        id: id
+      }
+    });
   }
 
   async findAll(): Promise<Client[]> {
@@ -47,7 +51,7 @@ export class ClientService {
     );
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     const isDeleted = await this.clientModel.destroy({
       where: {
         id: id,

@@ -13,9 +13,9 @@ export class ClientResolver {
 
   @Query((returns) => Client)
   async client(
-    @Args({ name: 'id', type: () => Int }) id: number,
+    @Args('id') id: string,
   ): Promise<Client> {
-    const recipe = await this.clientService.findOneById(id);
+    const recipe = await this.clientService.findOne(id);
     if (!recipe) {
       throw new NotFoundException(id);
     }
@@ -52,7 +52,7 @@ export class ClientResolver {
   // remove client
 
   @Mutation((returns) => Boolean)
-  async removeClient(@Args({ name: 'id', type: () => Int }) id: number) {
+  async removeClient(@Args({ name: 'id', type: () => String }) id: string) {
     console.log('enter in delete');
     return this.clientService.remove(id);
   }

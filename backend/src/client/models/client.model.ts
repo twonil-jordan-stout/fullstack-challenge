@@ -4,7 +4,7 @@ import { Column, Model, PrimaryKey, Table } from 'sequelize-typescript';
 @ObjectType({ description: 'client' })
 @Table({ tableName: 'clients', initialAutoIncrement: '10000' })
 export class Client extends Model {
-  @Field((type) => Int)
+  @Field()
   @PrimaryKey
   @Column
   id: number;
