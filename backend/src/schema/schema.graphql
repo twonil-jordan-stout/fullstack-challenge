@@ -1,0 +1,29 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""client"""
+type Client {
+  id: Float!
+  name: String!
+  description: String
+  product: String!
+}
+
+type Query {
+  client(id: String!): Client!
+  clients: [Client!]!
+}
+
+type Mutation {
+  addClient(newClientData: NewClientInput!): Client!
+  updateClient(updateClientData: NewClientInput!): String!
+  removeClient(id: String!): Boolean!
+}
+
+input NewClientInput {
+  id: String!
+  name: String!
+  description: String
+  product: String!
+}
